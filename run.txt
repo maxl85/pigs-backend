@@ -26,3 +26,22 @@ npm run start:dev
 
 // TODO
 Сделать миграции для продакшена как в https://github.com/brocoders/nestjs-boilerplate/tree/main
+
+
+
+
+
+https://wanago.io/2023/01/16/api-nestjs-docker-compose/
+docker images
+docker rmi
+
+docker rm
+docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"
+
+docker build --tag "nestjs-api" .
+docker run nestjs-api
+docker run -it nestjs-api
+docker compose up
+docker compose stop
+docker compose down
+
