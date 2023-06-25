@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { CreateDoorDto } from './dto/create-door.dto';
-import { UpdateDoorDto } from './dto/update-door.dto';
+import { DoorEntity } from './entities/door.entity';
+
 
 @Injectable()
 export class DoorsService {
-  create(createDoorDto: CreateDoorDto) {
-    return 'This action adds a new door';
+  constructor(
+    @InjectRepository(DoorEntity)
+    private repository: Repository<DoorEntity>,
+  ) { }
+
+  create(dto: CreateDoorDto, userId: number) {
+    return this.repository.save({
+      user: { id: userId },
+      ...dto
+    });
   }
 
-  findAll() {
-    return `This action returns all doors`;
+  findAll(userId: number) {
+    const qb = this.repository.createQueryBuilder('door');
+    qb.where('door.userId = :userId', { userId });
+    return qb.getMany();
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} door`;
-  }
-
-  update(id: number, updateDoorDto: UpdateDoorDto) {
-    return `This action updates a #${id} door`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} door`;
-  }
+  
 }

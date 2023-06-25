@@ -20,3 +20,9 @@ npm install --save-dev @types/passport-jwt
 
 
 npm run start:dev
+
+
+
+
+// TODO
+Сделать миграции для продакшена как в https://github.com/brocoders/nestjs-boilerplate/tree/main

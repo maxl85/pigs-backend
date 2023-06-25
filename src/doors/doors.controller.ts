@@ -1,37 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { DoorsService } from './doors.service';
 import { CreateDoorDto } from './dto/create-door.dto';
-import { UpdateDoorDto } from './dto/update-door.dto';
+import { UserId } from '../decorators/user-id.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 
 @Controller('doors')
+@UseGuards(JwtAuthGuard)
 @ApiTags('doors')
+@ApiBearerAuth()
 export class DoorsController {
   constructor(private readonly doorsService: DoorsService) {}
 
   @Post()
-  create(@Body() createDoorDto: CreateDoorDto) {
-    return this.doorsService.create(createDoorDto);
+  create(@Body() dto: CreateDoorDto, @UserId() userId: number) {
+    return this.doorsService.create(dto, userId);
   }
 
   @Get()
-  findAll() {
-    return this.doorsService.findAll();
+  findAll(@UserId() userId: number) {
+    return this.doorsService.findAll(userId);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.doorsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDoorDto: UpdateDoorDto) {
-    return this.doorsService.update(+id, updateDoorDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.doorsService.remove(+id);
-  }
+  
 }

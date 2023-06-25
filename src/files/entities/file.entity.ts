@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, ManyToOne, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 import { UserEntity } from '../../users/entities/user.entity';
 
@@ -7,16 +7,19 @@ import { UserEntity } from '../../users/entities/user.entity';
 export class FileEntity {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column()
   filename: string;
 
+  @Column({ type: 'timestamp' })
+  dateTime: Date;
+
   @ManyToOne(() => UserEntity, (user) => user.files)
   user: UserEntity;
-  
-  @CreateDateColumn({type: 'timestamp'})
+
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
-  
+
   // @UpdateDateColumn({type: 'timestamp'})
   // updatedAt: Date;
 }

@@ -2,8 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { CreateFileDto } from './dto/create-file.dto';
-import { UpdateFileDto } from './dto/update-file.dto';
 import { FileEntity } from './entities/file.entity';
 
 @Injectable()
@@ -15,15 +13,18 @@ export class FilesService {
   
   findAll(userId: number) {
     const qb = this.repository.createQueryBuilder('file');
-
     qb.where('file.userId = :userId', { userId });
-
     return qb.getMany();
   }
   
-  create(file: Express.Multer.File, userId: number) {
+  saveFiles(file: Express.Multer.File, userId: number) {
+    const dateArray = file.filename.split('-').map((item)=>parseInt(item));
+    dateArray[1] = dateArray[1] - 1;
+    const dateTime = new Date(...(dateArray as []));
+    
     return this.repository.save({
       filename: file.filename,
+      dateTime: dateTime,
       user: { id: userId },
     });
   }
