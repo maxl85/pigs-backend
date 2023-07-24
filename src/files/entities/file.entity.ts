@@ -10,6 +10,9 @@ export class FileEntity {
 
   @Column()
   filename: string;
+  
+  @Column()
+  camId: string;
 
   @Column({ type: 'timestamp' })
   dateTime: Date;

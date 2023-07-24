@@ -20,6 +20,7 @@ npm install --save-dev @types/passport-jwt
 
 
 npm run start:dev
+npm run build
 
 
 
@@ -38,10 +39,29 @@ docker rmi
 docker rm
 docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"
 
+npm run build
 docker build --tag "nestjs-api" .
 docker run nestjs-api
 docker run -it nestjs-api
 docker compose up
 docker compose stop
 docker compose down
+
+docker volume ls
+docker volume inspect VOLUME
+docker volume rm VOLUME
+docker volume prune
+
+
+
+// Postgres
+\l - Список всех баз
+\du - Список всех пользователей
+\c test; - Подключиться к БД
+\dt - Список таблиц
+\d users; - Список полей таблицы
+create database test;
+create user test with encrypted password '123';
+grant all privileges on database test to test;
+SELECT * from users;
 
