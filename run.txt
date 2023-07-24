@@ -88,7 +88,8 @@ npm ci
 npm run build
 docker build --tag "nestjs-api" .
 docker compose up
-
+docker compose logs -f
+docker exec -it nestjs-api sh
 
 
 

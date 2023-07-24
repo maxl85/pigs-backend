@@ -28,6 +28,8 @@ services:
       - "7777:7777"
     # networks:
     #   - nest-init
+    volumes:
+      - ~/uploads:/user/src/app/uploads
     depends_on:
       - postgres_db
 
