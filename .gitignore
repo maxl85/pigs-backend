@@ -2,7 +2,9 @@
 /dist
 /node_modules
 .env
+.env_
 docker.env
+docker.env_
 
 
 # Logs

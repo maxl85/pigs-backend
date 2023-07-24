@@ -65,3 +65,31 @@ create user test with encrypted password '123';
 grant all privileges on database test to test;
 SELECT * from users;
 
+
+
+// Yandex Cloud
+sudo apt update
+sudo apt upgrade
+
+// nvm
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+nvm list-remote
+nvm install v18
+nvm ls
+nvm current
+nvm use v18
+nvm alias default 18
+
+https://docs.docker.com/engine/install/ubuntu/
+
+git clone https://github.com/maxl85/pigs-backend.git
+cd pigs-backend
+npm ci
+npm run build
+docker build --tag "nestjs-api" .
+docker compose up
+
+
+
+
+https://stackoverflow.com/questions/66605192/file-uploading-along-with-other-data-in-swagger-nestjs

@@ -17,12 +17,20 @@ export class FilesService {
     return qb.getMany();
   }
   
-  saveFiles(file: Express.Multer.File, userId: number) {
-    const dateArray = file.filename.split('-').map((item)=>parseInt(item));
-    dateArray[1] = dateArray[1] - 1;
-    const dateTime = new Date(...(dateArray as []));
+  saveFiles(camId: string, dateTime: Date, file: Express.Multer.File, userId: number) {
+    // const dateArray = file.filename.split('-').map((item)=>parseInt(item));
+    // dateArray[1] = dateArray[1] - 1;
+    // const dateTime = new Date(...(dateArray as []));
+    
+    // return this.repository.save({
+    //   camId,
+    //   filename: file.filename,
+    //   dateTime: dateTime,
+    //   user: { id: userId },
+    // });
     
     return this.repository.save({
+      camId: camId,
       filename: file.filename,
       dateTime: dateTime,
       user: { id: userId },

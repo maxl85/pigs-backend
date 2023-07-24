@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Response, Param, UseInterceptors, UploadedFile, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Response, Param, UseInterceptors, UploadedFile, UseGuards, Body } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -6,6 +6,7 @@ import { FilesService } from './files.service';
 import { fileStorage } from './storage';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserId } from '../decorators/user-id.decorator';
+import { CreateFileDto } from './dto/create-file.dto';
 
 
 @Controller('files')
@@ -13,24 +14,33 @@ import { UserId } from '../decorators/user-id.decorator';
 export class FilesController {
   constructor(private readonly filesService: FilesService) { }
   
+  // @Post('upload')
+  // @UseGuards(JwtAuthGuard)
+  // @ApiBearerAuth()
+  // @UseInterceptors(FileInterceptor('file', { storage: fileStorage }))
+  // @ApiConsumes('multipart/form-data')
+  // @ApiBody({
+  //   schema: {
+  //     type: 'object',
+  //     properties: {
+  //       file: {
+  //         type: 'string',
+  //         format: 'binary',
+  //       },
+  //     },
+  //   },
+  // })
+  // uploadFile(@UploadedFile() file: Express.Multer.File, @UserId() userId: number) {
+  //   return this.filesService.saveFiles(file, userId);
+  // }
+  
   @Post('upload')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @UseInterceptors(FileInterceptor('file', { storage: fileStorage }))
   @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        file: {
-          type: 'string',
-          format: 'binary',
-        },
-      },
-    },
-  })
-  uploadFile(@UploadedFile() file: Express.Multer.File, @UserId() userId: number) {
-    return this.filesService.saveFiles(file, userId);
+  @UseInterceptors(FileInterceptor('file', { storage: fileStorage }))
+  uploadFile(@Body() dto: CreateFileDto, @UploadedFile() file: Express.Multer.File, @UserId() userId: number) {
+    return this.filesService.saveFiles(dto.camId, dto.dateTime, file, userId);
   }
   
   @Get()

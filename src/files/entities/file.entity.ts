@@ -7,13 +7,13 @@ import { UserEntity } from '../../users/entities/user.entity';
 export class FileEntity {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  filename: string;
   
   @Column()
   camId: string;
 
+  @Column()
+  filename: string;
+  
   @Column({ type: 'timestamp' })
   dateTime: Date;
 
