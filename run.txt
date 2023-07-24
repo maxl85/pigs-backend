@@ -86,6 +86,8 @@ git clone https://github.com/maxl85/pigs-backend.git
 cd pigs-backend
 npm ci
 npm run build
+nano .env
+nano docker.env
 docker build --tag "nestjs-api" .
 docker compose up
 docker compose logs -f

@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private readonly configService: ConfigService,
+    private configService: ConfigService,
   ) {}
   
   async validateUser(username: string, password: string): Promise<any> {
@@ -38,8 +38,8 @@ export class AuthService {
         token: this.jwtService.sign({ id: userData.id }),
       };
     } catch (err) {
-      console.log(err);
-      throw new ForbiddenException('Ошибка при регистрации');
+      // throw new ForbiddenException('Ошибка при регистрации');
+      throw new ForbiddenException(err.message);
     }
   }
   
