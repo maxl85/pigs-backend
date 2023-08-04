@@ -30,6 +30,17 @@ npm run build
 
 
 
+// Postgres
+\l - Список всех баз
+\du - Список всех пользователей
+\c test; - Подключиться к БД
+\dt - Список таблиц
+\d users; - Список полей таблицы
+create database test;
+create user test with encrypted password '123';
+grant all privileges on database test to test;
+SELECT * from users;
+
 
 
 https://wanago.io/2023/01/16/api-nestjs-docker-compose/
@@ -53,20 +64,6 @@ docker volume rm VOLUME
 docker volume prune
 
 
-
-// Postgres
-\l - Список всех баз
-\du - Список всех пользователей
-\c test; - Подключиться к БД
-\dt - Список таблиц
-\d users; - Список полей таблицы
-create database test;
-create user test with encrypted password '123';
-grant all privileges on database test to test;
-SELECT * from users;
-
-
-
 // Yandex Cloud
 sudo apt update
 sudo apt upgrade
@@ -82,6 +79,7 @@ nvm alias default 18
 
 https://docs.docker.com/engine/install/ubuntu/
 
+
 git clone https://github.com/maxl85/pigs-backend.git
 cd pigs-backend
 npm ci
@@ -89,7 +87,7 @@ npm run build
 nano .env
 nano docker.env
 docker build --tag "nestjs-api" .
-docker compose up
+docker compose up -d
 docker compose logs -f
 docker exec -it nestjs-api sh
 
