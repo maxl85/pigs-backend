@@ -51,8 +51,8 @@ export class FilesController {
   }
   
   @Get(':path')
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
+  // @ApiBearerAuth()
   download(@Param('path') path: string, @Response() response) {
     return response.sendFile(path, { root: './uploads' });
   }
