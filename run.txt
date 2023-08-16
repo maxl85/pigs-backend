@@ -90,6 +90,12 @@ docker build --tag "nestjs-api" .
 docker compose up -d
 docker compose logs -f
 docker exec -it nestjs-api sh
+docker compose stop
+
+git pull
+
+
+
 
 
 
