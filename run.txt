@@ -88,14 +88,21 @@ nano .env
 nano docker.env
 docker build --tag "nestjs-api" .
 docker compose up -d
-docker compose logs -f
+docker compose logs -f -n 20
+docker compose logs -n 20
 docker exec -it nestjs-api sh
 docker compose stop
 
 git pull
+docker build --tag "nestjs-api" .
+docker compose up -d
+docker compose logs -f
 
 
-
+mkdir ~/backup
+mkdir ~/backup/uploads
+cp -r uploads ~/backup
+sudo cp -r postgres_data ~/backup
 
 
 
