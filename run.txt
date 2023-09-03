@@ -64,6 +64,8 @@ docker volume rm VOLUME
 docker volume prune
 
 
+docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=123 -d postgres
+
 // Yandex Cloud
 sudo apt update
 sudo apt upgrade
@@ -93,7 +95,9 @@ docker compose logs -n 20
 docker exec -it nestjs-api sh
 docker compose stop
 
+
 git pull
+npm run build
 docker build --tag "nestjs-api" .
 docker compose up -d
 docker compose logs -f
@@ -101,9 +105,20 @@ docker compose logs -f
 
 mkdir ~/backup
 mkdir ~/backup/uploads
+mkdir ~/backup/predicted
 cp -r uploads ~/backup
+cp -r predicted ~/backup
 sudo cp -r postgres_data ~/backup
 
 
 
 https://stackoverflow.com/questions/66605192/file-uploading-along-with-other-data-in-swagger-nestjs
+
+
+
+find . -name "2023-08-12*.jpg" -type f
+sudo find . -name "2023-08-12*.jpg" -type f -delete
+
+scp -r user@158.160.2.88:/home/user/uploads  C:\\111
+
+scp -r user@51.250.100.147:/home/user/predicted/found  C:\\111
